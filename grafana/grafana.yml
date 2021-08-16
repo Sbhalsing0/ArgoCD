@@ -1,0 +1,67 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: grafana
+  name: grafana
+  namespace: grafana
+spec:
+  selector:
+    matchLabels:
+      app: grafana
+  template:
+    metadata:
+      labels:
+        app: grafana
+    spec:
+      containers:
+        - image: grafana/grafana:latest
+          imagePullPolicy: IfNotPresent
+          name: grafana
+          ports:
+            - containerPort: 3000
+              name: http-grafana
+              protocol: TCP
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /robots.txt
+              port: 3000
+              scheme: HTTP
+            initialDelaySeconds: 10
+            periodSeconds: 30
+            successThreshold: 1
+            timeoutSeconds: 2
+          resources:
+            limits:
+              memory: 4Gi
+            requests:
+              cpu: 100m
+              memory: 2Gi
+          volumeMounts:
+            - name: dashboards-volume
+              mountPath: /var/lib/grafana/dashboards
+            - name: storage-volume
+              mountPath: /var/lib/grafana
+            - name: dashboard-provider
+              mountPath: /etc/grafana/provisioning/dashboards
+            - name: datasources-provider
+              mountPath: /etc/grafana/provisioning/datasources
+      volumes:
+        - name: dashboards-volume
+          configMap:
+            name: grafana-dashs
+        - name: storage-volume
+          emptyDir: {}
+        - name: dashboard-provider
+          configMap:
+            name: grafana-dash-provider
+            items:
+              - key: providers.yaml
+                path: providers.yaml
+        - name: datasources-provider
+          configMap:
+            name: grafana-datasources-provider
+            items:
+              - key: providers.yaml
+                path: providers.yaml
