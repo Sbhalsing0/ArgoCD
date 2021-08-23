@@ -28,7 +28,7 @@ spec:
   ports:
     - port: 8081
       protocol: TCP
-      targetPort: http-nodejs
+      targetPort: 8081
   selector:
     app: nodejs
   sessionAffinity: None
