@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: nodejs-deployment
-        image: sbhalsing0/reactapp:latest
+        image: sbhalsing0/reactapp:10
         ports:
         - containerPort: 8081
 ---
@@ -28,7 +28,7 @@ spec:
   ports:
     - port: 8081
       protocol: TCP
-      targetPort: 8081
+      targetPort: http-nodejs
   selector:
     app: nodejs
   sessionAffinity: None
