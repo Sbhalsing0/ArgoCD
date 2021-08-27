@@ -4,7 +4,6 @@ metadata:
   name: nodejs-deployment
   labels:
     app: nodejs
-  namespace: default
 spec:
   replicas: 3
   selector:
@@ -25,7 +24,6 @@ apiVersion: v1
 kind: Service
 metadata:
   name: nodejs
-  namespace: default
 spec:
   ports:
     - port: 8081
