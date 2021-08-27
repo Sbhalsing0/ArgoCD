@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: nodejs-deployment
-  namespace: default
+  namespace: example-app
   labels:
     app: nodejs
 spec:
@@ -25,7 +25,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: nodejs
-  namespace: default
+  namespace: example-app
 spec:
   ports:
     - port: 8081
