@@ -1,0 +1,21 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  generateName: jenkinsjob-notification-
+  annotations:
+    argocd.argoproj.io/hook: PostSync
+    argocd.argoproj.io/hook-delete-policy: HookSucceeded
+spec:
+  template:
+    spec:
+      containers:
+      - name: jenkinsjob-notification
+        image: curlimages/curl
+        command:
+          - "curl"
+          - "-X"
+          - "POST"
+          - "-u admin:111dea25efc33cf02515ba28902f6b617c"
+          - "https://7af2-2402-e280-3e4f-da-2193-5bdf-c4e1-326e.ngrok-free.app/job/test-new/build?token=newtoken"
+      restartPolicy: Never
+  backoffLimit: 2
