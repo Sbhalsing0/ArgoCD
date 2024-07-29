@@ -15,7 +15,7 @@ spec:
           - "sh"
           - "-c"
           - >
-            curl -X POST -u admin:111dea25efc33cf02515ba28902f6b617c"
+            curl -X POST -u admin:111dea25efc33cf02515ba28902f6b617c
             "https://7af2-2402-e280-3e4f-da-2193-5bdf-c4e1-326e.ngrok-free.app/job/test-new/build?token=newtoken"
       restartPolicy: Never
   backoffLimit: 2
