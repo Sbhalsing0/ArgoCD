@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: nodejs-deployment
-        image: sbhalsing0/reactapp:latest
+        image: sbhalsing0/reactapp:324
         ports:
         - containerPort: 8081
 ---
